@@ -3,6 +3,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as Device from "expo-device";
 import * as Location from "expo-location";
 
+import { generateRandomCoordinates } from "@/helpers";
+import data from "../../data.json";
+
 type RejectValueProp = {
   rejectValue: string;
 };
@@ -16,23 +19,19 @@ export type StatusProp =
   | "dropped-off"
   | null;
 
-export type DriverLocationProps = {
-  latitude: string;
-  longitude: string;
-} | null;
+type CoordinatesProps = {
+  latitude: number;
+  longitude: number;
+};
+
+export type DriverLocationProps = CoordinatesProps | null;
 
 export type RideRequestsProps = {
   id: string; // Unique identifier for the ride
   userId: string; // ID of the user requesting the ride
   driverId: string | null; // ID of the driver accepting the ride (null if not accepted)
-  pickupLocation: {
-    latitude: number; // Latitude of the pickup location
-    longitude: number; // Longitude of the pickup location
-  };
-  destination: {
-    latitude: number; // Latitude of the destination
-    longitude: number; // Longitude of the destination
-  };
+  pickupLocation: CoordinatesProps; // Latitude and Longitude of the pickup location
+  destination: CoordinatesProps; // Latitude and Longitude of the destination
   status: StatusProp; // Status of the ride request
   pickupTime: Date; // Time when the ride is scheduled for pickup
   timestamp: Date; // Timestamp of when the ride request was made
@@ -48,7 +47,7 @@ export const getDriverLocation = createAsyncThunk<
   DriverLocationProps,
   void,
   RejectValueProp
->("data/driverLocation", async (_, { rejectWithValue }) => {
+>("ride/driverLocation", async (_, { rejectWithValue }) => {
   try {
     if (Platform.OS === "android" && !Device.isDevice) {
       throw new Error(
@@ -63,14 +62,41 @@ export const getDriverLocation = createAsyncThunk<
 
     const location = await Location.getCurrentPositionAsync({});
     return {
-      latitude: location.coords.latitude.toString(),
-      longitude: location.coords.longitude.toString(),
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
     };
   } catch (error) {
     return rejectWithValue(
       error instanceof Error
         ? error.message
         : "Unable to retrieve the driver's current location"
+    );
+  }
+});
+
+export const fetchRideRequests = createAsyncThunk<
+  RideRequestsProps,
+  CoordinatesProps,
+  RejectValueProp
+>("ride/rideRequests", async ({ latitude, longitude }, { rejectWithValue }) => {
+  try {
+    const randomCoordinates = generateRandomCoordinates(
+      latitude,
+      longitude,
+      100, // 100 meters radius
+      22
+    );
+
+    return data.map((v, i) => ({
+      ...v,
+      pickupLocation: randomCoordinates[i * 2],
+      destination: randomCoordinates[i * 2 + 1],
+    }));
+  } catch (error) {
+    return rejectWithValue(
+      error instanceof Error
+        ? error.message
+        : "Unable to generate random ride requests"
     );
   }
 });

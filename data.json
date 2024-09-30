@@ -1,0 +1,162 @@
+[
+  {
+    "id": "0032a95e-76c5-4c7b-a918-121f6bc8d830",
+    "userId": "e115f731-6c17-4ee1-adfa-9e9dd01b72d9",
+    "driverId": null,
+    "pickupLocation": {
+      "latitude": 40.485449,
+      "longitude": -81.175695
+    },
+    "destination": {
+      "latitude": -4.008212,
+      "longitude": 139.673242
+    },
+    "status": "dropped-off",
+    "pickupTime": "2024-10-01T01:55:57.711426",
+    "timestamp": "2024-09-11T17:55:57.711453"
+  },
+  {
+    "id": "0afdd6c3-4e3b-4960-9bc8-2b20c0290c90",
+    "userId": "af79047d-d6f8-440a-8d3b-8d6d0437aa01",
+    "driverId": "8f47b9e1-898e-4d66-928c-37c428d26676",
+    "pickupLocation": {
+      "latitude": -61.148126,
+      "longitude": 116.515488
+    },
+    "destination": {
+      "latitude": -10.719876,
+      "longitude": -2.238691
+    },
+    "status": "picked-up",
+    "pickupTime": "2024-09-30T19:55:57.711578",
+    "timestamp": "2024-09-17T17:55:57.711589"
+  },
+  {
+    "id": "ce919dce-779e-40e3-a85f-0078ba9ee475",
+    "userId": "be5d6811-7a4a-4e44-be8c-762344b0b123",
+    "driverId": "c18796a5-51d7-4062-b32d-e079c08be4d6",
+    "pickupLocation": {
+      "latitude": 0.994823,
+      "longitude": -77.36684
+    },
+    "destination": {
+      "latitude": -23.550434,
+      "longitude": -106.885839
+    },
+    "status": "picked-up",
+    "pickupTime": "2024-10-01T16:55:57.711663",
+    "timestamp": "2024-09-13T17:55:57.711670"
+  },
+  {
+    "id": "dda50e55-08d7-41ca-8388-4abbda8d956b",
+    "userId": "33b386d4-77d0-4f32-8697-ae2e22cc3925",
+    "driverId": "09cd2f22-a6a0-4ece-95f6-165df44a7d02",
+    "pickupLocation": {
+      "latitude": 19.893187,
+      "longitude": -139.320773
+    },
+    "destination": {
+      "latitude": -56.076507,
+      "longitude": 24.976176
+    },
+    "status": "started",
+    "pickupTime": "2024-09-30T20:55:57.711728",
+    "timestamp": "2024-09-07T17:55:57.711733"
+  },
+  {
+    "id": "2c9ab6f3-c0ed-4288-8de2-8530ef81ad51",
+    "userId": "2c63022f-9dd6-4213-8b8e-9947a5aa8e50",
+    "driverId": null,
+    "pickupLocation": {
+      "latitude": 56.149932,
+      "longitude": -104.654016
+    },
+    "destination": {
+      "latitude": 35.772298,
+      "longitude": 153.912329
+    },
+    "status": "declined",
+    "pickupTime": "2024-10-01T06:55:57.711770",
+    "timestamp": "2024-08-31T17:55:57.711775"
+  },
+  {
+    "id": "e87601ea-3f0b-49b6-aa11-f2db5ac7a9fa",
+    "userId": "11b7fb07-9796-4b8e-83ff-e048d2fd8cdd",
+    "driverId": "1333396e-2fd6-4168-9108-be2ade7efeb3",
+    "pickupLocation": {
+      "latitude": -53.349338,
+      "longitude": 31.808585
+    },
+    "destination": {
+      "latitude": 26.933013,
+      "longitude": 91.956301
+    },
+    "status": "declined",
+    "pickupTime": "2024-10-01T03:55:57.711832",
+    "timestamp": "2024-09-16T17:55:57.711839"
+  },
+  {
+    "id": "8fa57ef6-89b5-47a1-b07e-83bd7686aa3f",
+    "userId": "bb825f85-5fea-4930-882c-dfbccd7ba9ac",
+    "driverId": "8018bbaa-f600-455f-a6b6-501b45272670",
+    "pickupLocation": {
+      "latitude": -35.656709,
+      "longitude": -44.151261
+    },
+    "destination": {
+      "latitude": -48.9923,
+      "longitude": 58.186086
+    },
+    "status": "pending",
+    "pickupTime": "2024-10-01T16:55:57.712039",
+    "timestamp": "2024-09-17T17:55:57.712059"
+  },
+  {
+    "id": "1dce38f1-c19f-4456-9230-764a723f5d00",
+    "userId": "c7e30f51-6245-47d3-b03e-96c2fc640d7d",
+    "driverId": "3e307356-2a03-4a00-8fce-35fb29176697",
+    "pickupLocation": {
+      "latitude": -36.757167,
+      "longitude": 63.847232
+    },
+    "destination": {
+      "latitude": -35.555287,
+      "longitude": -139.06762
+    },
+    "status": "dropped-off",
+    "pickupTime": "2024-10-01T17:55:57.712134",
+    "timestamp": "2024-09-02T17:55:57.712143"
+  },
+  {
+    "id": "72d4b3c3-2fd0-41d1-ad98-ef895f21a729",
+    "userId": "f736bebd-5cc9-4267-b8a7-e775daea9e76",
+    "driverId": "619d623b-2b36-4d9e-992e-a6e6b68bb36b",
+    "pickupLocation": {
+      "latitude": -61.306638,
+      "longitude": 15.974204
+    },
+    "destination": {
+      "latitude": -30.733392,
+      "longitude": -76.560597
+    },
+    "status": "accepted",
+    "pickupTime": "2024-10-01T06:55:57.712189",
+    "timestamp": "2024-09-16T17:55:57.712194"
+  },
+  {
+    "id": "e9904da5-a741-4bfa-a3c9-f1439ac0e318",
+    "userId": "389c0074-34ea-4b0d-9995-5f030b9655d4",
+    "driverId": "f6149215-d7d6-4748-8aa2-98fa7478d4bc",
+    "pickupLocation": {
+      "latitude": -16.413777,
+      "longitude": 172.178026
+    },
+    "destination": {
+      "latitude": 77.28083,
+      "longitude": 108.010453
+    },
+    "status": "started",
+    "pickupTime": "2024-09-30T22:55:57.712247",
+    "timestamp": "2024-09-11T17:55:57.712252"
+  }
+]
