@@ -1,44 +1,28 @@
-import { useState, useEffect } from "react";
-import { Platform, Text, View, StyleSheet } from "react-native";
-import * as Device from "expo-device";
-import * as Location from "expo-location";
+import React, { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import View from "react-native-ui-lib/view";
+import Text from "react-native-ui-lib/text";
 
-export default function App() {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { getDriverLocation } from "@/redux/actions/rideAction";
+import { selectRideDriverLocation } from "@/redux/slices/rideSlice";
+
+const Home = (): React.JSX.Element => {
+  const dispatch = useAppDispatch();
+  const driverLocation = useAppSelector(selectRideDriverLocation);
+
+  console.log("driverLocation", driverLocation);
 
   useEffect(() => {
-    (async () => {
-      if (Platform.OS === "android" && !Device.isDevice) {
-        setErrorMsg(
-          "Oops, this will not work on Snack in an Android Emulator. Try it on your device!"
-        );
-        return;
-      }
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
-
-  let text = "Waiting..";
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
+    dispatch(getDriverLocation());
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.paragraph}>{text}</Text>
+      <Text style={styles.paragraph}>test</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -52,3 +36,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+export default Home;
