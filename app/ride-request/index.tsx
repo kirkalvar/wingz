@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, View } from "react-native";
+import View from "react-native-ui-lib/view";
+import Text from "react-native-ui-lib/text";
 
 const RideRequestLists = (): React.JSX.Element => {
   return (
