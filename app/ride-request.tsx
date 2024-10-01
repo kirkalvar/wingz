@@ -17,13 +17,15 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { setRideRequests, selectRideRequests } from "@/redux/slices/rideSlice";
 import { BackButton, Circle, Container } from "@/components";
 import { getAddressFromCoordinates } from "@/helpers";
-import { useFetchAddresses } from "@/hooks";
+import { useFetchAddresses, useDetailsRegionAndMarkers } from "@/hooks";
+import { Map } from "@/components";
 
 const RideRequestDetails = (): React.ReactNode => {
   const { id } = useGlobalSearchParams();
   const dispatch = useAppDispatch();
   const rideRequests = useAppSelector(selectRideRequests);
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const mapRef = useRef(null);
 
   const snapPoints = useMemo(() => ["40%", "80%"], []);
   const selectedRideRequest = useMemo(
@@ -31,6 +33,7 @@ const RideRequestDetails = (): React.ReactNode => {
     [rideRequests]
   );
 
+  const { markers, region } = useDetailsRegionAndMarkers(selectedRideRequest);
   const { pickupAddress, destinationAddress } =
     useFetchAddresses(selectedRideRequest);
 
@@ -50,10 +53,14 @@ const RideRequestDetails = (): React.ReactNode => {
     return null;
   }
 
-  const { userId, status, pickupTime, timestamp } = selectedRideRequest;
+  const { status, pickupTime, timestamp } = selectedRideRequest;
+
+  console.log(markers, region);
 
   return (
     <Container>
+      {region && <Map ref={mapRef} region={region} markers={markers} />}
+
       <View style={styles.backButton}>
         <Circle
           size={35}
@@ -86,6 +93,7 @@ const RideRequestDetails = (): React.ReactNode => {
               onPress={() => handleAcceptOrDeclinedPress("declined")}
             />
             <Button
+              flex-1
               bg-grey10
               marginL-5
               label="Accept"
@@ -102,6 +110,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     alignItems: "center",
+    paddingHorizontal: 15,
   },
   backButton: {
     position: "absolute",
