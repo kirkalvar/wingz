@@ -3,7 +3,7 @@ import View from "react-native-ui-lib/view";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import {
-  getDriverLocation,
+  getUseCurrentLocation,
   fetchRideRequests,
 } from "@/redux/actions/rideAction";
 import { selectRide } from "@/redux/slices/rideSlice";
@@ -23,11 +23,11 @@ const Home = (): React.JSX.Element => {
   // console.log("region", region);
 
   const init = useCallback(async () => {
-    const intialCoords = await dispatch(getDriverLocation()).unwrap();
+    const intialCoords = await dispatch(getUseCurrentLocation()).unwrap();
     if (intialCoords) {
       dispatch(fetchRideRequests(intialCoords));
     }
-  }, [dispatch, getDriverLocation, fetchRideRequests]);
+  }, [dispatch, getUseCurrentLocation, fetchRideRequests]);
 
   useEffect(() => {
     init();

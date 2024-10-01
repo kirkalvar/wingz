@@ -6,7 +6,10 @@ import type {
   RideRequestsProps,
   RideProps,
 } from "../actions/rideAction";
-import { getDriverLocation, fetchRideRequests } from "../actions/rideAction";
+import {
+  getUseCurrentLocation,
+  fetchRideRequests,
+} from "../actions/rideAction";
 import userData from "../../data/user.json";
 
 const initialState: RideProps = {
@@ -24,7 +27,7 @@ const rideSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(
-      getDriverLocation.fulfilled,
+      getUseCurrentLocation.fulfilled,
       (state, action: PayloadAction<UserProps["coordinate"]>) => {
         state.user.coordinate = action.payload;
       }

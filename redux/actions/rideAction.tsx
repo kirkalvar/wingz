@@ -46,7 +46,7 @@ export type RideProps = {
   status: string;
 };
 
-export const getDriverLocation = createAsyncThunk<
+export const getUseCurrentLocation = createAsyncThunk<
   UserProps["coordinate"],
   void,
   RejectValueProp
