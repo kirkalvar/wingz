@@ -10,6 +10,7 @@ import { calculateRegion } from "@/helpers";
 type MarkerProps = {
   id: string;
   coordinate: CoordinatesProps;
+  isRideRequest: boolean;
 };
 
 const DEFAULT_REGION = {
@@ -31,6 +32,11 @@ const useRideData = (user: UserProps, rideRequests: RideRequestsProps[]) => {
         coordinate: item.pickupLocation,
         isRideRequest: true,
       }));
+      markers.push({
+        id: user.id,
+        coordinate: user.coordinate,
+        isRideRequest: false,
+      });
 
       coordinates = rideRequests.map((item) => item.pickupLocation);
       region = calculateRegion([user.coordinate, ...coordinates]);
