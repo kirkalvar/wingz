@@ -1,3 +1,5 @@
+import * as Location from "expo-location";
+
 import type { CoordinatesProps } from "./redux/actions/rideAction";
 
 export const generateRandomCoordinates = (
@@ -71,4 +73,27 @@ export const calculateRegion = (coordinates: CoordinatesProps[]) => {
     latitudeDelta: latitudeDelta + latitudeDelta * paddingFactor,
     longitudeDelta: longitudeDelta + longitudeDelta * paddingFactor,
   };
+};
+
+export const getAddressFromCoordinates = async (
+  latitude: number,
+  longitude: number
+) => {
+  const apiKey = "AIzaSyAjvM66FjJ-pVjMDglq-InI8GvFwE1lRI4";
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.results && data.results.length > 0) {
+      const address = data.results[0].formatted_address;
+      console.log("Address:", address);
+      return address;
+    } else {
+      console.error("No address found");
+    }
+  } catch (error) {
+    console.error("Error getting address:", error);
+  }
 };
