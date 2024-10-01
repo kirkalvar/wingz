@@ -7,13 +7,20 @@ import type {
 } from "@/redux/actions/rideAction";
 import { calculateRegion } from "@/helpers";
 
-type MarkerProps = {
+export type RegionProps = {
+  latitude: number;
+  latitudeDelta: number;
+  longitude: number;
+  longitudeDelta: number;
+};
+
+export type MarkerProps = {
   id: string;
   coordinate: CoordinatesProps;
   isRideRequest: boolean;
 };
 
-const DEFAULT_REGION = {
+const DEFAULT_REGION: RegionProps = {
   latitude: 14.553386252798912,
   latitudeDelta: 0.003248375715622309,
   longitude: 121.03862265143954,
