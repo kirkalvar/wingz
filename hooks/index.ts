@@ -1,2 +1,2 @@
 export { default as useFetchAddresses } from "./useFetchAddresses";
-export { default as useRideData } from "./useRideData";
+export { default as useRegionAndMarkers } from "./useRegionAndMarkers";
