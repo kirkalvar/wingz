@@ -1,2 +1,2 @@
 export { default as useFetchAddresses } from "./useFetchAddresses";
-export { default as useRegionAndMarkers } from "./useRegionAndMarkers";
+export { default as useListsRegionAndMarkers } from "./useListsRegionAndMarkers";

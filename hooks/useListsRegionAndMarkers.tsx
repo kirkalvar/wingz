@@ -23,7 +23,7 @@ export type MarkerProps = {
   isRideRequest: boolean;
 };
 
-const useRegionAndMarkers = () => {
+const useListsRegionAndMarkers = () => {
   const { user, rideRequests } = useAppSelector(selectRide);
 
   return useMemo(() => {
@@ -55,4 +55,4 @@ const useRegionAndMarkers = () => {
   }, [user, rideRequests]);
 };
 
-export default useRegionAndMarkers;
+export default useListsRegionAndMarkers;
