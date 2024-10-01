@@ -15,7 +15,7 @@ import _ from "lodash";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { setRideRequests, selectRideRequests } from "@/redux/slices/rideSlice";
-import { BackButton, Circle } from "@/components";
+import { BackButton, Circle, Container } from "@/components";
 import { getAddressFromCoordinates } from "@/helpers";
 import { useFetchAddresses } from "@/hooks";
 
@@ -53,7 +53,7 @@ const RideRequestDetails = (): React.ReactNode => {
   const { userId, status, pickupTime, timestamp } = selectedRideRequest;
 
   return (
-    <>
+    <Container>
       <View style={styles.backButton}>
         <Circle
           size={35}
@@ -94,7 +94,7 @@ const RideRequestDetails = (): React.ReactNode => {
           </View>
         </BottomSheetView>
       </BottomSheet>
-    </>
+    </Container>
   );
 };
 
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 15,
+    top: 30,
     left: 15,
     zIndex: 9,
   },
