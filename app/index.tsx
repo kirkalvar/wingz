@@ -1,25 +1,26 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { StyleSheet } from "react-native";
+import React, { useRef, useEffect, useCallback } from "react";
 import View from "react-native-ui-lib/view";
-import Text from "react-native-ui-lib/text";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import {
   getDriverLocation,
   fetchRideRequests,
 } from "@/redux/actions/rideAction";
-import {
-  selectRideDriverLocation,
-  selectRideRequests,
-} from "@/redux/slices/rideSlice";
+import { selectRide } from "@/redux/slices/rideSlice";
+import { useRideData } from "@/hooks";
+import { Map } from "@/components";
 
 const Home = (): React.JSX.Element => {
+  const mapRef = useRef(null);
   const dispatch = useAppDispatch();
-  const driverLocation = useAppSelector(selectRideDriverLocation);
-  const rideRequests = useAppSelector(selectRideRequests);
+  const { user, rideRequests } = useAppSelector(selectRide);
+  const { markers, region } = useRideData(user, rideRequests);
 
-  console.log("driverLocation", driverLocation);
-  console.log("rideRequests", rideRequests);
+  // console.log("user", user);
+  // console.log("rideRequests", rideRequests);
+
+  // console.log("markers", markers);
+  // console.log("region", region);
 
   const init = useCallback(async () => {
     const intialCoords = await dispatch(getDriverLocation()).unwrap();
@@ -33,19 +34,15 @@ const Home = (): React.JSX.Element => {
   }, [init]);
 
   return (
-    <View style={styles.container}>
-      <Text>test</Text>
+    <View flex>
+      <Map
+        ref={mapRef}
+        region={region}
+        markers={markers}
+        onPressMarker={() => {}}
+      />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-});
 
 export default Home;
