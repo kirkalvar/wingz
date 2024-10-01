@@ -21,6 +21,7 @@ export type MarkerProps = {
   id: string;
   coordinate: CoordinatesProps;
   isRideRequest: boolean;
+  piont?: string;
 };
 
 const useListsRegionAndMarkers = () => {
@@ -36,6 +37,7 @@ const useListsRegionAndMarkers = () => {
         id: item.id,
         coordinate: item.pickupLocation,
         isRideRequest: true,
+        point: "pickup",
       }));
       markers.push({
         id: user.id,
