@@ -7,6 +7,9 @@ import type {
 } from "@/redux/actions/rideAction";
 import { calculateRegion } from "@/helpers";
 
+import { useAppSelector } from "@/redux/hook";
+import { selectRide } from "@/redux/slices/rideSlice";
+
 export type RegionProps = {
   latitude: number;
   latitudeDelta: number;
@@ -27,7 +30,9 @@ const DEFAULT_REGION: RegionProps = {
   longitudeDelta: 0.08596008620700246,
 };
 
-const useRideData = (user: UserProps, rideRequests: RideRequestsProps[]) => {
+const useRideData = () => {
+  const { user, rideRequests } = useAppSelector(selectRide);
+
   return useMemo(() => {
     let markers: MarkerProps[] = [];
     let coordinates: CoordinatesProps[] = [];

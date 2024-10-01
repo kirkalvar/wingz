@@ -3,12 +3,11 @@ import View from "react-native-ui-lib/view";
 import Button from "react-native-ui-lib/button";
 import { useNavigation } from "expo-router";
 
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { useAppDispatch } from "@/redux/hook";
 import {
   getUseCurrentLocation,
   fetchRideRequests,
 } from "@/redux/actions/rideAction";
-import { selectRide } from "@/redux/slices/rideSlice";
 import { useRideData } from "@/hooks";
 import { Map } from "@/components";
 
@@ -16,14 +15,7 @@ const Home = (): React.JSX.Element => {
   const navigation = useNavigation();
   const mapRef = useRef(null);
   const dispatch = useAppDispatch();
-  const { user, rideRequests } = useAppSelector(selectRide);
-  const { markers, region } = useRideData(user, rideRequests);
-
-  // console.log("user", user);
-  // console.log("rideRequests", rideRequests);
-
-  // console.log("markers", markers);
-  // console.log("region", region);
+  const { markers, region } = useRideData();
 
   const handleOnPress = useMemo(() => {
     navigation.navigate("ride-request", {
@@ -44,13 +36,13 @@ const Home = (): React.JSX.Element => {
 
   return (
     <View bg-white flex>
-      <Button label="View" onPress={handleOnPress} />
-      {/*<Map
+      {/*<Button label="View" onPress={handleOnPress} />*/}
+      <Map
         ref={mapRef}
         region={region}
         markers={markers}
         onPressMarker={() => {}}
-      />*/}
+      />
     </View>
   );
 };
