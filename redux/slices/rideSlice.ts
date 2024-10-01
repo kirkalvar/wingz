@@ -2,14 +2,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import type { RootState } from "../store";
 import type {
-  DriverLocationProps,
+  UserProps,
   RideRequestsProps,
   RideProps,
 } from "../actions/rideAction";
 import { getDriverLocation, fetchRideRequests } from "../actions/rideAction";
+import userData from "../../data/user.json";
 
 const initialState: RideProps = {
-  driverLocation: null,
+  user: {
+    id: userData.userId,
+    coordinate: null,
+  },
   rideRequests: [],
   status: "",
 };
@@ -21,8 +25,8 @@ const rideSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       getDriverLocation.fulfilled,
-      (state, action: PayloadAction<DriverLocationProps>) => {
-        state.driverLocation = action.payload;
+      (state, action: PayloadAction<UserProps["coordinate"]>) => {
+        state.user.coordinate = action.payload;
       }
     );
     builder.addCase(
@@ -35,9 +39,8 @@ const rideSlice = createSlice({
 });
 
 export const selectRide = (state: RootState): RideProps => state.ride;
-export const selectRideDriverLocation = (
-  state: RootState
-): DriverLocationProps | object => state.ride.driverLocation;
+export const selectRideUser = (state: RootState): UserProps | object =>
+  state.ride.user;
 export const selectRideRequests = (
   state: RootState
 ): RideRequestsProps | object => state.ride.rideRequests;

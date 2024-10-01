@@ -4,7 +4,7 @@ import * as Device from "expo-device";
 import * as Location from "expo-location";
 
 import { generateRandomCoordinates } from "@/helpers";
-import data from "../../data.json";
+import rideRequestsData from "../../data/ride-requests.json";
 
 type RejectValueProp = {
   rejectValue: string;
@@ -19,12 +19,15 @@ export type StatusProp =
   | "dropped-off"
   | null;
 
-type CoordinatesProps = {
+export type CoordinatesProps = {
   latitude: number;
   longitude: number;
 };
 
-export type DriverLocationProps = CoordinatesProps | null;
+export type UserProps = {
+  id: string;
+  coordinate: CoordinatesProps | null;
+};
 
 export type RideRequestsProps = {
   id: string; // Unique identifier for the ride
@@ -38,13 +41,13 @@ export type RideRequestsProps = {
 };
 
 export type RideProps = {
-  driverLocation: DriverLocationProps | object;
+  user: UserProps;
   rideRequests: RideRequestsProps[];
   status: string;
 };
 
 export const getDriverLocation = createAsyncThunk<
-  DriverLocationProps,
+  UserProps["coordinate"],
   void,
   RejectValueProp
 >("ride/driverLocation", async (_, { rejectWithValue }) => {
@@ -87,7 +90,7 @@ export const fetchRideRequests = createAsyncThunk<
       22
     );
 
-    return data.map((v, i) => ({
+    return rideRequestsData.map((v, i) => ({
       ...v,
       pickupLocation: randomCoordinates[i * 2],
       destination: randomCoordinates[i * 2 + 1],
