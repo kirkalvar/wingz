@@ -53,13 +53,22 @@ const RideRequestDetails = (): React.ReactNode => {
     return null;
   }
 
-  const { status, pickupTime, timestamp } = selectedRideRequest;
-
-  console.log(markers, region);
+  const { status, pickupTime, pickupLocation, destination, timestamp } =
+    selectedRideRequest;
 
   return (
     <Container>
-      {region && <Map ref={mapRef} region={region} markers={markers} />}
+      {region && (
+        <Map
+          ref={mapRef}
+          region={region}
+          markers={markers}
+          direction={{
+            origin: pickupLocation,
+            destination: destination,
+          }}
+        />
+      )}
 
       <View style={styles.backButton}>
         <Circle
@@ -114,7 +123,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 30,
+    top: 50,
     left: 15,
     zIndex: 9,
   },
