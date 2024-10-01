@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { useColorScheme } from "@/components/useColorScheme";
 
@@ -19,9 +20,28 @@ export {
   ErrorBoundary,
 } from "expo-router";
 
+type Route = {
+  name: string;
+  options?: object;
+};
+
+// Ensure this array matches the structure and types defined above
+const routes: Route[] = [
+  {
+    name: "index",
+    options: { headerShown: false },
+  },
+  {
+    name: "ride-request",
+    options: { headerShown: false },
+  },
+];
+
+export const initialRoute = routes[0];
+
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "index",
+  initialRouteName: initialRoute.name,
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -50,7 +70,9 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <RootLayoutNav />
+      <GestureHandlerRootView>
+        <RootLayoutNav />
+      </GestureHandlerRootView>
     </Provider>
   );
 }
@@ -61,7 +83,13 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="ride-request" options={{ headerShown: false }} />
+        {routes.map((route) => (
+          <Stack.Screen
+            key={route.name}
+            name={route.name}
+            options={route.options}
+          />
+        ))}
       </Stack>
     </ThemeProvider>
   );

@@ -43,7 +43,7 @@ const Home = (): React.JSX.Element => {
   }, [init]);
 
   return (
-    <View flex>
+    <View bg-white flex>
       <Button label="View" onPress={handleOnPress} />
       {/*<Map
         ref={mapRef}
