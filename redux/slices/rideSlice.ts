@@ -24,7 +24,11 @@ const initialState: RideProps = {
 const rideSlice = createSlice({
   name: "ride",
   initialState,
-  reducers: {},
+  reducers: {
+    setRideRequests: (state, action: PayloadAction<RideRequestsProps>) => {
+      state.rideRequests = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getUseCurrentLocation.fulfilled,
@@ -40,6 +44,8 @@ const rideSlice = createSlice({
     );
   },
 });
+
+export const { setRideRequests } = rideSlice.actions;
 
 export const selectRide = (state: RootState): RideProps => state.ride;
 export const selectRideUser = (state: RootState): UserProps | object =>

@@ -14,7 +14,7 @@ import moment from "moment";
 import _ from "lodash";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { selectRideRequests } from "@/redux/slices/rideSlice";
+import { setRideRequests, selectRideRequests } from "@/redux/slices/rideSlice";
 import { BackButton, Circle } from "@/components";
 import { getAddressFromCoordinates } from "@/helpers";
 import { useFetchAddresses } from "@/hooks";
@@ -33,6 +33,18 @@ const RideRequestDetails = (): React.ReactNode => {
 
   const { pickupAddress, destinationAddress } =
     useFetchAddresses(selectedRideRequest);
+
+  const handleAcceptOrDeclinedPress = useCallback(
+    (action) => {
+      const updatedRequests = rideRequests.map((v) => ({
+        ...v,
+        status: v.id === selectedRideRequest?.id ? action : v.status,
+      }));
+
+      dispatch(setRideRequests(updatedRequests));
+    },
+    [rideRequests, selectedRideRequest, dispatch]
+  );
 
   if (!selectedRideRequest) {
     return null;
@@ -70,10 +82,15 @@ const RideRequestDetails = (): React.ReactNode => {
               outline
               outlineColor={Colors.grey10}
               marginR-5
-              label="Cancel"
-              onPress={() => {}}
+              label="Declined"
+              onPress={() => handleAcceptOrDeclinedPress("declined")}
             />
-            <Button bg-grey10 marginL-5 label="Accept" onPress={() => {}} />
+            <Button
+              bg-grey10
+              marginL-5
+              label="Accept"
+              onPress={() => handleAcceptOrDeclinedPress("accept")}
+            />
           </View>
         </BottomSheetView>
       </BottomSheet>
