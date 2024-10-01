@@ -1,6 +1,9 @@
+import Constants from "expo-constants";
 import * as Location from "expo-location";
 
 import type { CoordinatesProps } from "./redux/actions/rideAction";
+
+const { GOOGLE_MAP_API_KEY } = Constants.expoConfig.extra;
 
 export const generateRandomCoordinates = (
   lat: number,
@@ -79,8 +82,7 @@ export const getAddressFromCoordinates = async (
   latitude: number,
   longitude: number
 ) => {
-  const apiKey = "";
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${GOOGLE_MAP_API_KEY}`;
 
   try {
     const response = await fetch(url);

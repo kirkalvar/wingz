@@ -28,7 +28,7 @@ const useFetchAddresses = (
   }, [selectedRideRequest]);
 
   useEffect(() => {
-    // fetchAddress();
+    fetchAddress();
   }, [fetchAddress]);
 
   return { pickupAddress, destinationAddress };

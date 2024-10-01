@@ -18,6 +18,7 @@ const Home = (): React.JSX.Element => {
   const { markers, region } = useRideData();
 
   const handleOnPress = useMemo(() => {
+    console.log("handleOnPress");
     navigation.navigate("ride-request", {
       id: "8fa57ef6-89b5-47a1-b07e-83bd7686aa3f",
     });
@@ -36,7 +37,7 @@ const Home = (): React.JSX.Element => {
 
   return (
     <View bg-white flex>
-      {/*<Button label="View" onPress={handleOnPress} />*/}
+      <Button label="View" onPress={handleOnPress} />
       <Map
         ref={mapRef}
         region={region}
