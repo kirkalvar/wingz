@@ -79,7 +79,7 @@ export const getAddressFromCoordinates = async (
   latitude: number,
   longitude: number
 ) => {
-  const apiKey = "AIzaSyAjvM66FjJ-pVjMDglq-InI8GvFwE1lRI4";
+  const apiKey = "";
   const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
 
   try {
