@@ -56,6 +56,8 @@ const RideRequestDetails = (): React.ReactNode => {
   const { status, pickupTime, pickupLocation, destination, timestamp } =
     selectedRideRequest;
 
+  const isPendingStatus = status === "pending";
+
   return (
     <Container>
       {region && (
@@ -98,8 +100,9 @@ const RideRequestDetails = (): React.ReactNode => {
               outline
               outlineColor={Colors.grey10}
               marginR-5
-              label="Declined"
+              label="Decline"
               onPress={() => handleAcceptOrDeclinedPress("declined")}
+              disabled={!isPendingStatus}
             />
             <Button
               flex-1
@@ -107,6 +110,7 @@ const RideRequestDetails = (): React.ReactNode => {
               marginL-5
               label="Accept"
               onPress={() => handleAcceptOrDeclinedPress("accept")}
+              disabled={!isPendingStatus}
             />
           </View>
         </BottomSheetView>
