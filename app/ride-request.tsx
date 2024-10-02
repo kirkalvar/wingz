@@ -27,7 +27,7 @@ const RideRequestDetails = (): React.ReactNode => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const mapRef = useRef(null);
 
-  const snapPoints = useMemo(() => ["40%", "80%"], []);
+  const snapPoints = useMemo(() => [380], []);
   const selectedRideRequest = useMemo(
     () => _.find(rideRequests, { id }),
     [rideRequests]
