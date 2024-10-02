@@ -17,22 +17,26 @@ import { SVGMapMarker } from "@/assets/svgs";
 type DirectionProps = {
   origin: CoordinatesProps;
   destination: CoordinatesProps;
+  point?: "pickup" | "destination";
 };
 
 type MapProps = {
   region: RegionProps;
   markers: MarkerProps[];
   direction?: DirectionProps;
-  onPressMarker: (markerId: string) => void;
+  onPressMarker?: (markerId: string) => void;
 };
 
 const { GOOGLE_MAP_API_KEY } = Constants.expoConfig.extra;
 
 const Map = forwardRef(
   ({ region, markers, direction, onPressMarker }: MapProps, ref) => {
+    const markerprops = {};
+
     const handleMarkerPress = (e) => {
       const id = e._targetInst.return.key;
-      onPressMarker(id);
+
+      if (onPressMarker) onPressMarker(id);
     };
 
     return (
