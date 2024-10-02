@@ -27,7 +27,7 @@ const RideRequestDetails = (): React.ReactNode => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const mapRef = useRef(null);
 
-  const snapPoints = useMemo(() => [380], []);
+  const snapPoints = useMemo(() => [400], []);
   const selectedRideRequest = useMemo(
     () => _.find(rideRequests, { id }),
     [rideRequests]
@@ -57,6 +57,12 @@ const RideRequestDetails = (): React.ReactNode => {
     selectedRideRequest;
 
   const isPendingStatus = status === "pending";
+  const isDeclinedSatus = status === "declined";
+  const statusColor = isPendingStatus
+    ? Colors.yellow10
+    : isDeclinedSatus
+    ? Colors.red10
+    : Colors.green10;
 
   return (
     <Container>
@@ -92,7 +98,11 @@ const RideRequestDetails = (): React.ReactNode => {
 
           <View row spread marginB-10>
             <Text grey30>Status:</Text>
-            <Text grey20 uppercase style={styles.value}>
+            <Text
+              grey20
+              uppercase
+              style={[styles.value, { color: statusColor }]}
+            >
               {status}
             </Text>
           </View>
