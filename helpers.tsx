@@ -1,3 +1,4 @@
+import { ToastAndroid } from "react-native";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
 
@@ -89,13 +90,14 @@ export const getAddressFromCoordinates = async (
     const data = await response.json();
 
     if (data.results && data.results.length > 0) {
-      const address = data.results[0].formatted_address;
-      console.log("Address:", address);
-      return address;
+      return data.results[0].formatted_address;
     } else {
-      console.error("No address found");
+      throw new Error("No address found");
     }
   } catch (error) {
-    console.error("Error getting address:", error);
+    ToastAndroid.show(
+      error instanceof Error ? error.message : "Error getting address",
+      ToastAndroid.LONG
+    );
   }
 };
