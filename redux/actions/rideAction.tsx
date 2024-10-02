@@ -43,7 +43,8 @@ export type RideRequestsProps = {
 export type RideProps = {
   user: UserProps;
   rideRequests: RideRequestsProps[];
-  status: string;
+  status: string | null;
+  error: string | null;
 };
 
 export const getUseCurrentLocation = createAsyncThunk<
@@ -97,9 +98,7 @@ export const fetchRideRequests = createAsyncThunk<
     }));
   } catch (error) {
     return rejectWithValue(
-      error instanceof Error
-        ? error.message
-        : "Unable to generate random ride requests"
+      error instanceof Error ? error.message : "Unable to fetch ride requests"
     );
   }
 });

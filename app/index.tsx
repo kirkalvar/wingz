@@ -1,18 +1,21 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import { useNavigation } from "expo-router";
 
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import {
   getUseCurrentLocation,
   fetchRideRequests,
 } from "@/redux/actions/rideAction";
+import { selectRideError } from "@/redux/slices/rideSlice";
 import { useListsRegionAndMarkers } from "@/hooks";
 import { Container, Map } from "@/components";
+import ErrorMessage from "@/containers/ErrorMessage";
 
 const Home = (): React.JSX.Element => {
   const navigation = useNavigation();
   const mapRef = useRef(null);
   const dispatch = useAppDispatch();
+  const error = useAppSelector(selectRideError);
   const { markers, region } = useListsRegionAndMarkers();
 
   const handleOnPress = useCallback(
@@ -37,6 +40,8 @@ const Home = (): React.JSX.Element => {
 
   return (
     <Container>
+      {error && <ErrorMessage message={error} />}
+
       {region && (
         <Map
           ref={mapRef}

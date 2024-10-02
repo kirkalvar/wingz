@@ -18,7 +18,8 @@ const initialState: RideProps = {
     coordinate: null,
   },
   rideRequests: [],
-  status: "",
+  status: null,
+  error: null,
 };
 
 const rideSlice = createSlice({
@@ -34,12 +35,28 @@ const rideSlice = createSlice({
       getUseCurrentLocation.fulfilled,
       (state, action: PayloadAction<UserProps["coordinate"]>) => {
         state.user.coordinate = action.payload;
+        state.status = "success";
+      }
+    );
+    builder.addCase(
+      getUseCurrentLocation.rejected,
+      (state, action: PayloadAction<string>) => {
+        state.status = action.payload;
+        state.status = "failed";
       }
     );
     builder.addCase(
       fetchRideRequests.fulfilled,
       (state, action: PayloadAction<RideRequestsProps>) => {
         state.rideRequests = action.payload;
+        state.status = "success";
+      }
+    );
+    builder.addCase(
+      fetchRideRequests.rejected,
+      (state, action: PayloadAction<string>) => {
+        state.status = action.payload;
+        state.status = "failed";
       }
     );
   },
@@ -48,10 +65,18 @@ const rideSlice = createSlice({
 export const { setRideRequests } = rideSlice.actions;
 
 export const selectRide = (state: RootState): RideProps => state.ride;
+
 export const selectRideUser = (state: RootState): UserProps | object =>
   state.ride.user;
+
 export const selectRideRequests = (
   state: RootState
 ): RideRequestsProps | object => state.ride.rideRequests;
+
+export const selectRideStatus = (state: RootState): RideProps["status"] =>
+  state.ride.status;
+
+export const selectRideError = (state: RootState): RideProps["error"] =>
+  state.ride.error;
 
 export default rideSlice.reducer;
