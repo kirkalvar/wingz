@@ -86,13 +86,18 @@ const RideRequestDetails = (): React.ReactNode => {
 
       <BottomSheet ref={bottomSheetRef} index={0} snapPoints={snapPoints}>
         <BottomSheetView style={styles.contentContainer}>
-          <Text>Status: {status}</Text>
-          <Text>Book Date: {moment(timestamp).format("ddd, MMM DD")}</Text>
-          <Text>
+          <Text text70 marginB-15>
+            Ride Request Details
+          </Text>
+          <Text marginB-5>Status: {status}</Text>
+          <Text marginB-5>
+            Book Date: {moment(timestamp).format("ddd, MMM DD")}
+          </Text>
+          <Text marginB-5>
             Pick-up Date: {moment(pickupTime).format("ddd, MMM DD @ hh:mm a")}
           </Text>
-          <Text>Pick-up Location: {pickupAddress}</Text>
-          <Text>Drop-off Location: {destinationAddress}</Text>
+          <Text marginB-5>Pick-up Location: {pickupAddress}</Text>
+          <Text marginB-5>Drop-off Location: {destinationAddress}</Text>
 
           <View row spread marginT-15>
             <Button
@@ -122,7 +127,6 @@ const RideRequestDetails = (): React.ReactNode => {
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    alignItems: "center",
     paddingHorizontal: 15,
   },
   backButton: {

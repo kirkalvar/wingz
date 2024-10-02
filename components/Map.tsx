@@ -31,8 +31,6 @@ const { GOOGLE_MAP_API_KEY } = Constants.expoConfig.extra;
 
 const Map = forwardRef(
   ({ region, markers, direction, onPressMarker }: MapProps, ref) => {
-    const markerprops = {};
-
     const handleMarkerPress = (e) => {
       const id = e._targetInst.return.key;
 
