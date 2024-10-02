@@ -16,9 +16,9 @@ import _ from "lodash";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { setRideRequests, selectRideRequests } from "@/redux/slices/rideSlice";
 import { BackButton, Circle, Container } from "@/components";
-import { getAddressFromCoordinates } from "@/helpers";
 import { useFetchAddresses, useDetailsRegionAndMarkers } from "@/hooks";
-import { Map } from "@/components";
+import { Hr, Map } from "@/components";
+import { SVGMapMarker } from "@/assets/svgs";
 
 const RideRequestDetails = (): React.ReactNode => {
   const { id } = useGlobalSearchParams();
@@ -86,33 +86,56 @@ const RideRequestDetails = (): React.ReactNode => {
 
       <BottomSheet ref={bottomSheetRef} index={0} snapPoints={snapPoints}>
         <BottomSheetView style={styles.contentContainer}>
-          <Text text70 marginB-15>
+          <Text text70 marginB-15 style={styles.heading}>
             Ride Request Details
           </Text>
 
           <View row spread marginB-10>
-            <Text grey20>Status:</Text>
-            <Text uppercase>{status}</Text>
+            <Text grey30>Status:</Text>
+            <Text grey20 uppercase style={styles.value}>
+              {status}
+            </Text>
           </View>
 
           <View row spread marginB-10>
-            <Text grey20>Booked Date:</Text>
-            <Text>{moment(timestamp).format("ddd, MMM DD")}</Text>
+            <Text grey30>Booked Date:</Text>
+            <Text grey20 style={styles.value}>
+              {moment(timestamp).format("ddd, MMM DD")}
+            </Text>
           </View>
 
-          <View row spread marginB-10>
-            <Text grey20>Pick-up Date:</Text>
-            <Text>{moment(pickupTime).format("ddd, MMM DD @ hh:mm a")}</Text>
+          <View row spread>
+            <Text grey30>Pick-up Date:</Text>
+            <Text grey20 style={styles.value}>
+              {moment(pickupTime).format("ddd, MMM DD @ hh:mm a")}
+            </Text>
           </View>
 
-          <View row spread marginB-10>
-            <Text grey20>Pick-up Location:</Text>
-            <Text uppercase>{pickupAddress}</Text>
+          <Hr marginV-20 />
+
+          <View marginB-15>
+            <View row centerV marginB-5>
+              <SVGMapMarker color={Colors.red10} width={15} height={15} />
+              <Text grey30 marginL-5>
+                Pick-up Location:
+              </Text>
+            </View>
+
+            <Text grey20 style={styles.value}>
+              {pickupAddress}
+            </Text>
           </View>
 
-          <View row spread marginB-10>
-            <Text grey20>Drop-off Location:</Text>
-            <Text uppercase>{destinationAddress}</Text>
+          <View marginB-15>
+            <View row centerV marginB-5>
+              <SVGMapMarker color={Colors.grey10} width={15} height={15} />
+              <Text grey30 marginL-5>
+                Drop-off Location:
+              </Text>
+            </View>
+            <Text grey20 style={styles.value}>
+              {destinationAddress}
+            </Text>
           </View>
 
           <View row spread marginT-15>
@@ -150,6 +173,12 @@ const styles = StyleSheet.create({
     top: 50,
     left: 15,
     zIndex: 9,
+  },
+  heading: {
+    fontFamily: "Inter_600SemiBold",
+  },
+  value: {
+    fontFamily: "Inter_500Medium",
   },
 });
 
