@@ -8,7 +8,7 @@ import _ from "lodash";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { setRideRequests, selectRideRequests } from "@/redux/slices/rideSlice";
-import { BackButton, Circle, Container } from "@/components";
+import { BackButton, Container } from "@/components";
 import RideRequestInfo from "@/containers/RideRequestInfo";
 import { useFetchAddresses, useDetailsRegionAndMarkers } from "@/hooks";
 import { Map } from "@/components";
@@ -65,17 +65,7 @@ const RideRequestDetails = (): React.ReactNode => {
         />
       )}
 
-      <View style={styles.backButton}>
-        <Circle
-          size={35}
-          color="#0000004d"
-          style={{
-            borderWidth: 0,
-          }}
-        >
-          <BackButton color={Colors.white} size={18} />
-        </Circle>
-      </View>
+      <BackButton />
 
       <BottomSheet ref={bottomSheetRef} index={0} snapPoints={snapPoints}>
         <BottomSheetView style={styles.contentContainer}>
@@ -115,12 +105,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     paddingHorizontal: 15,
-  },
-  backButton: {
-    position: "absolute",
-    top: 50,
-    left: 15,
-    zIndex: 9,
   },
 });
 
