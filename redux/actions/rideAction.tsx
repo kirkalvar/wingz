@@ -86,7 +86,7 @@ export const fetchRideRequests = createAsyncThunk<
     const randomCoordinates = generateRandomCoordinates(
       latitude,
       longitude,
-      500, // 100 meters radius
+      1000, // 100 meters radius
       22
     );
 
