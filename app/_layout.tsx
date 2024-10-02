@@ -1,3 +1,4 @@
+import { LogBox } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   DarkTheme,
@@ -26,6 +27,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { useColorScheme } from "@/components/useColorScheme";
 import "../configs/theme";
+
+LogBox.ignoreLogs(["Require cycle"]);
 
 export {
   // Catch any errors thrown by the Layout component.
