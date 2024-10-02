@@ -89,15 +89,31 @@ const RideRequestDetails = (): React.ReactNode => {
           <Text text70 marginB-15>
             Ride Request Details
           </Text>
-          <Text marginB-5>Status: {status}</Text>
-          <Text marginB-5>
-            Book Date: {moment(timestamp).format("ddd, MMM DD")}
-          </Text>
-          <Text marginB-5>
-            Pick-up Date: {moment(pickupTime).format("ddd, MMM DD @ hh:mm a")}
-          </Text>
-          <Text marginB-5>Pick-up Location: {pickupAddress}</Text>
-          <Text marginB-5>Drop-off Location: {destinationAddress}</Text>
+
+          <View row spread marginB-10>
+            <Text grey20>Status:</Text>
+            <Text uppercase>{status}</Text>
+          </View>
+
+          <View row spread marginB-10>
+            <Text grey20>Booked Date:</Text>
+            <Text>{moment(timestamp).format("ddd, MMM DD")}</Text>
+          </View>
+
+          <View row spread marginB-10>
+            <Text grey20>Pick-up Date:</Text>
+            <Text>{moment(pickupTime).format("ddd, MMM DD @ hh:mm a")}</Text>
+          </View>
+
+          <View row spread marginB-10>
+            <Text grey20>Pick-up Location:</Text>
+            <Text uppercase>{pickupAddress}</Text>
+          </View>
+
+          <View row spread marginB-10>
+            <Text grey20>Drop-off Location:</Text>
+            <Text uppercase>{destinationAddress}</Text>
+          </View>
 
           <View row spread marginT-15>
             <Button
