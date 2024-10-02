@@ -63,25 +63,7 @@ const Map = forwardRef(
                       width={40}
                       height={40}
                     />
-                  )) || (
-                    <Circle
-                      bg-white
-                      size={30}
-                      style={{
-                        borderWidth: 2,
-                        borderColor: Colors.white,
-                        backgroundColor: Colors.blue30,
-                        shadowColor: "#000",
-                        shadowOffset: {
-                          width: 0,
-                          height: 12,
-                        },
-                        shadowOpacity: 0.58,
-                        shadowRadius: 16.0,
-                        elevation: 24,
-                      }}
-                    />
-                  )}
+                  )) || <Circle bg-white size={30} style={styles.circle} />}
                 </View>
               </Marker>
             );
@@ -105,6 +87,19 @@ const Map = forwardRef(
 const styles = StyleSheet.create({
   mapView: {
     height: "100%",
+  },
+  circle: {
+    borderWidth: 2,
+    borderColor: Colors.white,
+    backgroundColor: Colors.blue30,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+    elevation: 24,
   },
 });
 
